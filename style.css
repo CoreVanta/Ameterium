@@ -10,68 +10,59 @@
   --text-main: #e0e0e0;
   --text-dim: #888;
   --transition-speed: 0.4s;
-  --text-secondary: #a0a0a0;
 }
 
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
+  font-family: 'Cairo', sans-serif;
 }
 
 body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Cairo', sans-serif;
   background-color: var(--primary-bg);
   color: var(--text-main);
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   height: 100vh;
   overflow: hidden;
 }
 
-/* ===== Headings ===== */
-h1, h2, h3, h4, h5, h6 {
-  margin: 0;
-  font-weight: 600;
+/* العناوين */
+h1, h2, h3 {
+  color: var(--gold);
+  letter-spacing: 1px;
 }
 
-/* ===== Buttons ===== */
-.button, .btn, .btn-primary, .btn-secondary {
-  padding: 10px 25px;
+/* الأزرار */
+button {
+  background: linear-gradient(90deg, var(--accent), var(--gold));
   border: none;
-  cursor: pointer;
-  border-radius: 8px;
+  padding: 10px 25px;
+  color: #000;
   font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
   transition: all var(--transition-speed) ease;
   box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
-  color: #000;
 }
 
-.button:hover, .btn:hover {
-  opacity: 0.85;
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0, 200, 255, 0.5);
 }
 
-.btn-primary {
-  background-color: var(--accent);
-  color: #fff;
-}
-
-.btn-secondary {
-  background-color: var(--gold);
-  color: #0a0a0f;
-}
-
-/* ===== Input Fields ===== */
+/* الحقول */
 input {
   background-color: var(--secondary-bg);
   border: 1px solid var(--accent);
   color: var(--text-main);
   padding: 10px;
   border-radius: 6px;
-  margin-bottom: 10px;
   width: 100%;
+  margin-bottom: 10px;
 }
 
 input:focus {
@@ -79,7 +70,7 @@ input:focus {
   border-color: var(--gold);
 }
 
-/* ===== Containers ===== */
+/* الحاويات */
 .container {
   width: 90%;
   max-width: 420px;
@@ -89,18 +80,27 @@ input:focus {
   padding: 30px;
   box-shadow: 0 0 20px rgba(0, 200, 255, 0.1);
   text-align: center;
-  font-weight: 600;
-  transition: all 0.3s ease;
+  animation: fadeIn 1s ease forwards;
 }
 
-/* ===== Animations ===== */
+/* حركات */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* ===== Button Containers ===== */
-.button-container, .btn-container {
+/* الروابط */
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--gold);
+}
+
+/* تنسيق أزرار الصفحة الرئيسية */
+.button-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -108,18 +108,27 @@ input:focus {
   flex-wrap: wrap;
 }
 
-/* Buttons inside container */
+/* الأزرار داخل الصفحة الرئيسية */
 .button-container button {
-  flex: 1 1 45%;
-  font-size: clamp(0.8rem, 2vw, 1rem);
-  white-space: nowrap;
-  padding: 8px 16px;
+  min-width: 140px;
 }
 
-/* ===== Home Page Buttons Positioning ===== */
+/* تحكم في التجاوب */
+@media (max-width: 420px) {
+  .button-container {
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .button-container button {
+    flex: 1 1 45%;
+  }
+}
+
+/* ====== تخصيص موقع أزرار الصفحة الرئيسية ====== */
 .buttons {
   position: absolute;
-  bottom: 12vh; /* المسافة من أسفل الشاشة */
+  bottom: 12vh; /* ← المسافة من أسفل الشاشة، يمكنك تعديلها بحرية */
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -129,26 +138,10 @@ input:focus {
   transition: opacity 2s ease-in-out;
 }
 
-/* ===== Responsive Buttons for Mobile ===== */
-@media screen and (max-width: 767px) {
-  .button, .btn, .btn-primary, .btn-secondary {
-    flex: 1 1 auto;       /* السماح بالتصغير أو التكبير حسب المساحة */
-    min-width: 80px;      /* أصغر عرض للزر */
-    max-width: 150px;     /* أكبر عرض للزر */
-    text-align: center;
-  }
-
-  .button-container, .btn-container {
-    justify-content: center; /* محاذاة الأزرار في الوسط */
-    gap: 10px;               /* مسافة بين الأزرار */
-    flex-wrap: nowrap;        /* منع التفاف الأزرار */
-  }
-
+/* تحسين التجاوب على الشاشات الصغيرة */
+@media (max-width: 768px) {
   .buttons {
-    bottom: 15vh; /* رفع الأزرار قليلاً على الشاشات الصغيرة */
+    bottom: 15vh; /* ترفع الأزرار قليلاً للأعلى في الشاشات الصغيرة */
     gap: 18px;
   }
 }
-
-/* ===== Additional Styles ===== */
-/* لا يوجد أي تعديل على بقية التنسيقات لضمان سلامة الموقع */
