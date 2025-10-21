@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>أميتريوم - الدخول والتسجيل</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Cairo', sans-serif;
+      background: linear-gradient(to bottom right, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 2.5rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+      width: 90%;
+      max-width: 440px;
+      text-align: center;
+      backdrop-filter: blur(8px);
+      transition: all 0.4s ease;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 1.2rem;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.8rem;
+      margin: 0.5rem 0;
+      border: none;
+      border-radius: 8px;
+      outline: none;
+      font-size: 1rem;
+    }
+
+    button {
+      width: 100%;
+      background-color: #2ecc71;
+      color: #fff;
+      border: none;
+      padding: 0.9rem;
+      margin-top: 1rem;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover { background-color: #27ae60; }
+
+    .google-btn { background-color: #db4437; }
+    .google-btn:hover { background-color: #c0392b; }
+
+    .github-btn { background-color: #333; }
+    .github-btn:hover { background-color: #000; }
+
+    .facebook-btn { background-color: #1877f2; }
+    .facebook-btn:hover { background-color: #0d5edb; }
+
+    .twitter-btn { background-color: #1da1f2; }
+    .twitter-btn:hover { background-color: #0d8adb; }
+
+    .divider {
+      margin: 1.5rem 0;
+      color: #aaa;
+      position: relative;
+    }
+
+    .divider::before, .divider::after {
+      content: "";
+      position: absolute;
+      width: 40%;
+      height: 1px;
+      background: #555;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .divider::before { left: 0; }
+    .divider::after { right: 0; }
+
+    .switch {
+      margin-top: 1rem;
+      color: #ccc;
+      font-size: 0.95rem;
+      cursor: pointer;
+    }
+
+    .switch span {
+      color: #2ecc71;
+      text-decoration: underline;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>أميتريوم - فجر الاقتصاد الجديد</h1>
+
+    <!-- نموذج التسجيل -->
+    <div id="signupForm">
+      <input type="email" id="signupEmail" placeholder="البريد الإلكتروني">
+      <input type="password" id="signupPassword" placeholder="كلمة المرور">
+      <button id="signupBtn">إنشاء حساب</button>
+      <div class="divider">أو</div>
+      <button class="google-btn" id="googleSignup">تسجيل عبر Google</button>
+      <button class="github-btn" id="githubSignup">تسجيل عبر GitHub</button>
+      <button class="facebook-btn" id="facebookSignup">تسجيل عبر Facebook</button>
+      <button class="twitter-btn" id="twitterSignup">تسجيل عبر Twitter</button>
+      <div class="switch">لديك حساب؟ <span id="showLogin">تسجيل الدخول</span></div>
+    </div>
+
+    <!-- نموذج تسجيل الدخول -->
+    <div id="loginForm" class="hidden">
+      <input type="email" id="loginEmail" placeholder="البريد الإلكتروني">
+      <input type="password" id="loginPassword" placeholder="كلمة المرور">
+      <button id="loginBtn">تسجيل الدخول</button>
+      <div class="divider">أو</div>
+      <button class="google-btn" id="googleLogin">تسجيل دخول عبر Google</button>
+      <button class="github-btn" id="githubLogin">تسجيل دخول عبر GitHub</button>
+      <button class="facebook-btn" id="facebookLogin">تسجيل دخول عبر Facebook</button>
+      <button class="twitter-btn" id="twitterLogin">تسجيل دخول عبر Twitter</button>
+      <div class="switch">ليس لديك حساب؟ <span id="showSignup">إنشاء حساب جديد</span></div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, GithubAuthProvider, FacebookAuthProvider, TwitterAuthProvider } 
+      from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+
+    // 🔥 إعدادات مشروعك في Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyCUJDudVW_1lPh4UnvTY-5GT-att2uBJxs",
+      authDomain: "ameterium.firebaseapp.com",
+      projectId: "ameterium",
+      storageBucket: "ameterium.firebasestorage.app",
+      messagingSenderId: "650255548127",
+      appId: "1:650255548127:web:c6f973b3a505a7a291736a",
+      measurementId: "G-EKY4S15X6J"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    const providers = {
+      google: new GoogleAuthProvider(),
+      github: new GithubAuthProvider(),
+      facebook: new FacebookAuthProvider(),
+      twitter: new TwitterAuthProvider()
+    };
+
+    const signupForm = document.getElementById('signupForm');
+    const loginForm = document.getElementById('loginForm');
+    const showLogin = document.getElementById('showLogin');
+    const showSignup = document.getElementById('showSignup');
+
+    showLogin.onclick = () => {
+      signupForm.classList.add('hidden');
+      loginForm.classList.remove('hidden');
+    };
+    showSignup.onclick = () => {
+      loginForm.classList.add('hidden');
+      signupForm.classList.remove('hidden');
+    };
+
+    // تسجيل جديد
+    document.getElementById('signupBtn').onclick = async () => {
+      const email = document.getElementById('signupEmail').value;
+      const pass = document.getElementById('signupPassword').value;
+      try {
+        await createUserWithEmailAndPassword(auth, email, pass);
+        alert("تم إنشاء الحساب بنجاح 🎉");
+        window.location.href = "game.html";
+      } catch (err) {
+        alert("⚠️ خطأ: " + err.message);
+      }
+    };
+
+    // تسجيل دخول بالبريد
+    document.getElementById('loginBtn').onclick = async () => {
+      const email = document.getElementById('loginEmail').value;
+      const pass = document.getElementById('loginPassword').value;
+      try {
+        await signInWithEmailAndPassword(auth, email, pass);
+        alert("تم تسجيل الدخول بنجاح 🚀");
+        window.location.href = "game.html";
+      } catch (err) {
+        alert("⚠️ خطأ: " + err.message);
+      }
+    };
+
+    // التسجيل / الدخول عبر السوشيال
+    const setupSocialButton = (id, provider) => {
+      document.getElementById(id).onclick = async () => {
+        try {
+          await signInWithPopup(auth, provider);
+          alert("تم تسجيل الدخول بنجاح ⚡");
+          window.location.href = "game.html";
+        } catch (err) {
+          alert("⚠️ خطأ: " + err.message);
+        }
+      };
+    };
+
+    setupSocialButton("googleSignup", providers.google);
+    setupSocialButton("githubSignup", providers.github);
+    setupSocialButton("facebookSignup", providers.facebook);
+    setupSocialButton("twitterSignup", providers.twitter);
+    setupSocialButton("googleLogin", providers.google);
+    setupSocialButton("githubLogin", providers.github);
+    setupSocialButton("facebookLogin", providers.facebook);
+    setupSocialButton("twitterLogin", providers.twitter);
+  </script>
+</body>
+</html>
