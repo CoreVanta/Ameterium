@@ -89,9 +89,9 @@
   </div>
 
   <div class="buttons" id="choiceButtons">
-    <button>🔹 انضم إلى أميتريوم</button>
-    <button>🔸 شاهد النظام القديم ينهار</button>
-  </div>
+  <button id="joinBtn">🔹 انضم إلى أميتريوم</button>
+  <button id="watchBtn">🔸 شاهد النظام القديم ينهار</button>
+</div>
 
   <script>
     const storyText = document.getElementById("storyText");
@@ -127,6 +127,16 @@
     window.onload = () => {
       setTimeout(showNextPart, 1000);
     };
+
+    // عند الضغط على زر الانضمام
+document.getElementById("joinBtn").addEventListener("click", () => {
+  window.location.href = "auth.html"; // الانتقال إلى صفحة تسجيل الدخول
+});
+
+// الزر الثاني يمكن لاحقًا تخصيصه لعرض فيديو أو صفحة النظام القديم
+document.getElementById("watchBtn").addEventListener("click", () => {
+  alert("سيتم لاحقًا فتح مشهد انهيار النظام القديم 🎬");
+});
   </script>
 
 </body>
