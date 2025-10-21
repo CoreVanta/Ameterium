@@ -28,18 +28,23 @@
     }
 
     .story-text {
-      font-size: 1.3rem;
-      line-height: 2.2rem;
-      color: var(--text-main);
-      text-shadow: 0 0 10px #000;
-      opacity: 0;
-      transition: opacity 2s ease-in-out;
-      position: absolute;
-      width: 100%;
-      white-space: pre-wrap;
-      word-break: break-word;
-      z-index: 5;
-    }
+  font-size: 1.3rem;
+  line-height: 2.2rem;
+  color: var(--text-main);
+  text-shadow: 0 0 10px #000;
+  opacity: 0;
+  transition: opacity 2s ease-in-out;
+  position: absolute;
+  width: 80%;
+  max-width: 800px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  white-space: pre-wrap;
+  word-break: break-word;
+  z-index: 5;
+}
 
     .buttons {
       display: flex;
