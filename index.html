@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ameterium - Dawn of a New Economy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Cairo', sans-serif;
+    }
+
+    body {
+      background-color: #000;
+      color: #fff;
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+    }
+
+    .title {
+      position: relative;
+      top: 5vh;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #ffd700;
+      text-shadow: 0 0 10px #ffd700aa;
+      animation: fadeIn 2s ease-in-out forwards;
+    }
+
+    .story-container {
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 90%;
+      max-width: 900px;
+      height: 50vh; /* مكان ثابت في الوسط */
+      position: relative;
+    }
+
+    .story-text {
+      font-size: 1.3rem;
+      line-height: 2.2rem;
+      color: #eee;
+      text-shadow: 0 0 10px #000;
+      opacity: 0;
+      transition: opacity 2s ease-in-out;
+      position: absolute;
+      width: 100%;
+      white-space: pre-wrap;
+      word-break: break-word;
+      z-index: 5;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-bottom: 5vh;
+      opacity: 0;
+      transition: opacity 2s ease-in-out;
+    }
+
+    button {
+      background: transparent;
+      border: 2px solid #ffd700;
+      color: #ffd700;
+      padding: 10px 25px;
+      font-size: 1.2rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    button:hover {
+      background: #ffd700;
+      color: #000;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @media (max-width: 768px) {
+      .title { font-size: 1.6rem; }
+      .story-text { font-size: 1.1rem; line-height: 1.8rem; }
+      button { font-size: 1rem; padding: 8px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="title">أميتريوم - فجر الاقتصاد الجديد</div>
+
+  <div class="story-container">
+    <div class="story-text" id="storyText"></div>
+  </div>
+
+  <div class="buttons" id="choiceButtons">
+    <button>🔹 انضم إلى أميتريوم</button>
+    <button>🔸 شاهد النظام القديم ينهار</button>
+  </div>
+
+  <script>
+    const storyText = document.getElementById("storyText");
+    const buttons = document.getElementById("choiceButtons");
+
+    const storyParts = [
+      "العالم اليوم... ليس كما كان.",
+      "لعقودٍ طويلة، سيطر على الاقتصاد حفنة من الصفوة،\n امتلكوا المصارف، والموارد، والإعلام...\n وحتى القرارات التي تحدد مصير الشعوب.",
+      "ازدهرت ثرواتهم بينما غرق الملايين في الديون.\n حتى صار الإنسان رقماً في معادلةٍ لا يفهمها.\n وأسيـراً لنظامٍ ماليٍ لا يرحم الضعفاء.",
+      "ومع تصاعد الغضب، ظهرت فكرة جديدة...\n لم تولد من طمعٍ أو سلطة\n بل من إيمانٍ بأن المال يجب أن يخدم البشر، لا أن يستعبدهم.",
+      "هكذا وُلد مجلس أميتريوم...\n حركة عالمية تسعى لإعادة التوازن، لخلق اقتصادٍ عادلٍ يُكافئ الإنتاج لا النفوذ،\n حيث تُقاس القيمة بالعمل، لا بالحسابات السرية في البنوك.",
+      "والآن... بدأت الثورة الاقتصادية.\nأنت أمام خيارٍ مصيري:\nأن تبقى تابعًا للنظام القديم...\nأم تنضم إلى أميتريوم، وتصبح جزءًا من فجرٍ جديد للبشرية."
+    ];
+
+    let index = 0;
+
+    function showNextPart() {
+      if (index < storyParts.length) {
+        storyText.style.opacity = 0;
+        setTimeout(() => {
+          storyText.textContent = storyParts[index];
+          storyText.style.opacity = 1;
+          index++;
+          setTimeout(showNextPart, 5000); // مدة عرض كل فقرة
+        }, 2000); // مدة fade out
+      } else {
+        setTimeout(() => {
+          buttons.style.opacity = 1;
+        }, 1000);
+      }
+    }
+
+    window.onload = () => {
+      setTimeout(showNextPart, 1000);
+    };
+  </script>
+</body>
+</html>
