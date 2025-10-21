@@ -98,3 +98,29 @@ a {
 a:hover {
   color: var(--gold);
 }
+
+/* تنسيق أزرار الصفحة الرئيسية */
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+/* الأزرار داخل الصفحة الرئيسية */
+.button-container button {
+  min-width: 140px;
+}
+
+/* تحكم في التجاوب */
+@media (max-width: 420px) {
+  .button-container {
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .button-container button {
+    flex: 1 1 45%;
+  }
+}
