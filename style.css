@@ -124,3 +124,24 @@ a:hover {
     flex: 1 1 45%;
   }
 }
+
+/* ====== تخصيص موقع أزرار الصفحة الرئيسية ====== */
+.buttons {
+  position: absolute;
+  bottom: 12vh; /* ← المسافة من أسفل الشاشة، يمكنك تعديلها بحرية */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 25px;
+  justify-content: center;
+  flex-wrap: wrap;
+  transition: opacity 2s ease-in-out;
+}
+
+/* تحسين التجاوب على الشاشات الصغيرة */
+@media (max-width: 768px) {
+  .buttons {
+    bottom: 15vh; /* ترفع الأزرار قليلاً للأعلى في الشاشات الصغيرة */
+    gap: 18px;
+  }
+}
