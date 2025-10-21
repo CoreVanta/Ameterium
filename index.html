@@ -5,33 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ameterium - Dawn of a New Economy</title>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Cairo', sans-serif;
-    }
-
-    body {
-      background-color: #000;
-      color: #fff;
-      overflow: hidden;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
-      text-align: center;
-    }
-
     .title {
-      position: relative;
-      top: 5vh;
       font-size: 2rem;
       font-weight: 700;
-      color: #ffd700;
-      text-shadow: 0 0 10px #ffd700aa;
+      color: var(--gold);
+      text-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+      margin-top: 5vh;
       animation: fadeIn 2s ease-in-out forwards;
     }
 
@@ -42,14 +23,14 @@
       justify-content: center;
       width: 90%;
       max-width: 900px;
-      height: 50vh; /* مكان ثابت في الوسط */
+      height: 50vh;
       position: relative;
     }
 
     .story-text {
       font-size: 1.3rem;
       line-height: 2.2rem;
-      color: #eee;
+      color: var(--text-main);
       text-shadow: 0 0 10px #000;
       opacity: 0;
       transition: opacity 2s ease-in-out;
@@ -70,24 +51,20 @@
     }
 
     button {
-      background: transparent;
-      border: 2px solid #ffd700;
-      color: #ffd700;
+      background: linear-gradient(90deg, var(--accent), var(--gold));
+      color: #000;
+      font-weight: 700;
+      border: none;
       padding: 10px 25px;
-      font-size: 1.2rem;
       border-radius: 10px;
       cursor: pointer;
-      transition: all 0.3s;
+      box-shadow: 0 0 15px rgba(0, 200, 255, 0.2);
+      transition: all var(--transition-speed) ease;
     }
 
     button:hover {
-      background: #ffd700;
-      color: #000;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      transform: scale(1.05);
+      box-shadow: 0 0 25px rgba(0, 200, 255, 0.5);
     }
 
     @media (max-width: 768px) {
@@ -97,6 +74,7 @@
     }
   </style>
 </head>
+
 <body>
 
   <div class="title">أميتريوم - فجر الاقتصاد الجديد</div>
@@ -132,8 +110,8 @@
           storyText.textContent = storyParts[index];
           storyText.style.opacity = 1;
           index++;
-          setTimeout(showNextPart, 5000); // مدة عرض كل فقرة
-        }, 2000); // مدة fade out
+          setTimeout(showNextPart, 5000);
+        }, 2000);
       } else {
         setTimeout(() => {
           buttons.style.opacity = 1;
@@ -145,5 +123,6 @@
       setTimeout(showNextPart, 1000);
     };
   </script>
+
 </body>
 </html>
